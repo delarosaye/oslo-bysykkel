@@ -1,9 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import {StationsListContainer} from '../Styles/StationsListElements'
 import Station from './Station'
 
-const StationsList = ({ stationsWithAvailabilities}) => {
-    //console.log(station)
+const StationsList = ({ stationsWithAvailabilities }) => {
     return (
         <StationsListContainer>
             {stationsWithAvailabilities?.map((station) => (
@@ -19,6 +18,3 @@ const StationsList = ({ stationsWithAvailabilities}) => {
 
 export default StationsList
 
-const StationsListContainer = styled.div`
-    
-`;
