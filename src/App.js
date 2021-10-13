@@ -1,7 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import styled from 'styled-components'
 import axios from 'axios'
-import ReactTimeago from 'react-timeago'
+import {
+  AppContainer,
+  AppHeader,
+  AppBody,
+  Sidebar,
+  StationContainer,
+  AppDownload,
+  DownloadImage,
+  SidebarOperator,
+  AppHeaderTimestamp,
+  SidebarContent,
+  AppHeaderTitle,
+  DownloadLink,
+  DownloadTitle
+} from './Styles/AppElements'
 import StationsList from './components/StationsList'
 
 const App = () => {
@@ -43,8 +56,8 @@ const App = () => {
   return (
     <AppContainer>
       <AppHeader>
-        <h2>Oslo Bysykkel tilgjengelighet</h2>
-        <p>Sist oppdatert den {new Date(stationsWithAvailabilities[0]?.availabilities?.last_reported * 1000).toLocaleDateString("no-NO")}</p>
+        <AppHeaderTitle>Oslo Bysykkel tilgjengelighet</AppHeaderTitle>
+        <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilities[0]?.availabilities?.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
       </AppHeader>
       <AppBody>
           <StationContainer>
@@ -53,20 +66,20 @@ const App = () => {
             />
           </StationContainer>
           <Sidebar>
-          <h3>{systemInfo?.operator}</h3>
-          <p>{systemInfo?.name}</p>
-          <p>{systemInfo?.email}</p>
-          <p>{systemInfo?.phone_number}</p>
-          <h4>Last ned mobil Apper</h4>
+          <SidebarOperator>{systemInfo?.operator}</SidebarOperator>
+          <SidebarContent>{systemInfo?.name}</SidebarContent>
+          <SidebarContent>{systemInfo?.email}</SidebarContent>
+          <SidebarContent>{systemInfo?.phone_number}</SidebarContent>
+          <DownloadTitle>Last ned mobil Apper</DownloadTitle>
           <AppDownload>
-            <a href={systemInfo?.rental_apps?.android?.store_uri} target="_blank">
-              <img src="https://mohnackycarlsbad.com/wp-content/uploads/2016/11/googleplaystore.png"
+            <DownloadLink href={systemInfo?.rental_apps?.android?.store_uri} target="_blank">
+              <DownloadImage src="https://mohnackycarlsbad.com/wp-content/uploads/2016/11/googleplaystore.png"
               />
-            </a>
-            <a href={systemInfo?.rental_apps?.ios?.store_uri} target="_blank">
-              <img src="https://fosenenergi.no/wp-content/uploads/2020/09/app-store-logo.png"
+            </DownloadLink>
+            <DownloadLink href={systemInfo?.rental_apps?.ios?.store_uri} target="_blank">
+              <DownloadImage src="https://fosenenergi.no/wp-content/uploads/2020/09/app-store-logo.png"
               />
-            </a>
+            </DownloadLink>
           </AppDownload>
           </Sidebar>
       </AppBody>
@@ -76,65 +89,4 @@ const App = () => {
 
 export default App
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  //margin: 20px;
-`;
-const AppHeader = styled.div`
-  position: fixed;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  z-index: 10;
-  background-color: #fff;
-  > h2{
-    padding: 20px;
-    color: #555;
-  }
-  > p{
-    font-size: 14px;
-    font-style: italic;
-    padding: 20px;
-  }
-`;
-const AppBody = styled.div`
-  position: relative;
-  top: 90px;
-  width: 100%;
-  display: flex;
-`;
-const Sidebar = styled.div`
-  flex: 0.2;
-  background-color: #E0F2FF;
-  margin: 10px 20px 0 0;
-  padding: 20px;
-  height: 220px;
-  border-radius: 5px;
-  > p{
-    padding-bottom: 5px;
-  }
-  > h3 {
-    margin-bottom: 10px;
-  }
-  > h4{
-    margin-top: 15px;
-  }
-`;
-const StationContainer = styled.div`
-    flex: 1;
-`;
 
-const AppDownload = styled.div`
-  display: flex;
-  align-items: center;
-  > a {
-    >img{
-      width: 140px;
-      margin-top: 20px;
-    }
-  }
-`;
