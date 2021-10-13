@@ -1,21 +1,20 @@
 
 ## About the application
 
-This application displays each bicycle parking station in Oslo.\
-For each station it lists:\
+This application displays bicycles parking stations in Oslo. For each station it lists:
 
-* Name of a station
-* Capaciy i.e. total number of bicycles of the respective station
-* Number of available bicycles in the respective station
-* Address of the station
+* The name of a station
+* The capaciy i.e. total number of bicycles of the respective station
+* The number of available bicycles in the respective station
+* The address of the station
 
 ## How to run the application
 
-In the project directory, you can run:
+In the project directory, run:
 
 ### `yarn`
 
-then when packages download is finished run: 
+then when the packages download is finished run: 
 
 ### `yarn start`
 
