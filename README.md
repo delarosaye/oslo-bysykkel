@@ -13,9 +13,13 @@ This application displays bicycles parking stations in Oslo. For each station it
 In the project directory, run:
 
 ### `yarn`
+or 
+### `npm install`
 
 then when the packages download is finished run: 
 
 ### `yarn start`
+or
+### `npm start`
 
 
