@@ -15,7 +15,11 @@ export const AppHeader = styled.div`
     justify-content: space-between;
     z-index: 10;
     background-color: #fff;
-    `;
+    @media screen and (max-width: 700px){
+        flex-direction: column;
+        align-items: center;
+    }
+`;
 export const AppHeaderTitle = styled.h2`
     padding: 20px;
     color: #555;
@@ -24,6 +28,9 @@ export const AppHeaderTimestamp = styled.p`
     font-size: 14px;
     font-style: italic;
     padding: 20px;
+    @media screen and (max-width: 700px){
+        padding: 0px 0 30px 0;
+    }
 `;
 export const AppBody = styled.div`
     position: relative;
@@ -38,6 +45,9 @@ export const Sidebar = styled.div`
     padding: 20px;
     height: 220px;
     border-radius: 5px;
+    @media screen and (max-width: 700px){
+        display: none;
+    }
 `;
 export const SidebarOperator = styled.h3`
     margin-bottom: 10px;
