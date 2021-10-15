@@ -4,21 +4,24 @@ import {
   AppContainer,
   AppHeader,
   AppBody,
-  Sidebar,
+  Footer,
   StationContainer,
-  AppDownload,
+  FooterRight,
   DownloadImage,
-  SidebarOperator,
+  FooterOperator,
   AppHeaderTimestamp,
-  SidebarContent,
+  FooterContent,
   AppHeaderTitle,
   DownloadLink,
-  DownloadTitle
+  DownloadTitle,
+  FooterLeft,
+  DownloadIcons
 } from './Styles/AppElements'
 import StationsList from './components/StationsList'
 
 const App = () => {
   const [stationsWithAvailabilities, setStationsWithAvailabilities] = useState([])
+  const [stationsWithAvailabilitiesChunked, setStationsWithAvailabilitiesChunked] = useState([])
   const [systemInfo, setSystemInfo] = useState({})
 
   const getStationsWithAvailabilities = async (stationsAndAvailabilities) => {
@@ -44,44 +47,55 @@ const App = () => {
       .then(axios.spread((...allData) => {
         getStationsWithAvailabilities(allData)
       })).catch((err) => { console.log(err) });
-    
   }
 
-  useEffect(async() => {
+  useEffect(() => {
     fetchData()
   }, [])
 
-  console.log(systemInfo)
+  useEffect(() => {
+    if (stationsWithAvailabilities.length > 0) {
+      while (stationsWithAvailabilities.length > 0) {
+          stationsWithAvailabilitiesChunked.push(stationsWithAvailabilities.splice(0, 5))
+      }
+    }
+  }, [stationsWithAvailabilities])
+
+  console.log(stationsWithAvailabilitiesChunked[0]?.[0])
 
   return (
     <AppContainer>
       <AppHeader>
         <AppHeaderTitle>Oslo Bysykkel tilgjengelighet</AppHeaderTitle>
-        <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilities[0]?.availabilities?.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
+        <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilitiesChunked[0]?.[0].availabilities.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
       </AppHeader>
       <AppBody>
           <StationContainer>
             <StationsList
-              stationsWithAvailabilities={stationsWithAvailabilities}
+              stationsWithAvailabilities={stationsWithAvailabilitiesChunked}
             />
           </StationContainer>
-          <Sidebar>
-          <SidebarOperator>{systemInfo?.operator}</SidebarOperator>
-          <SidebarContent>{systemInfo?.name}</SidebarContent>
-          <SidebarContent>{systemInfo?.email}</SidebarContent>
-          <SidebarContent>{systemInfo?.phone_number}</SidebarContent>
-          <DownloadTitle>Last ned mobil Apper</DownloadTitle>
-          <AppDownload>
-            <DownloadLink href={systemInfo?.rental_apps?.android?.store_uri} target="_blank">
-              <DownloadImage src="https://mohnackycarlsbad.com/wp-content/uploads/2016/11/googleplaystore.png"
-              />
-            </DownloadLink>
-            <DownloadLink href={systemInfo?.rental_apps?.ios?.store_uri} target="_blank">
-              <DownloadImage src="https://fosenenergi.no/wp-content/uploads/2020/09/app-store-logo.png"
-              />
-            </DownloadLink>
-          </AppDownload>
-          </Sidebar>
+        <Footer>
+          <FooterLeft>
+            <FooterOperator>{systemInfo?.operator}</FooterOperator>
+            <FooterContent>{systemInfo?.name}</FooterContent>
+            <FooterContent>{systemInfo?.email}</FooterContent>
+            <FooterContent>{systemInfo?.phone_number}</FooterContent>
+          </FooterLeft>
+          <FooterRight>
+            <DownloadTitle>Last ned mobil Apper</DownloadTitle>
+            <DownloadIcons>
+              <DownloadLink href={systemInfo?.rental_apps?.android?.store_uri} target="_blank">
+                <DownloadImage src="https://mohnackycarlsbad.com/wp-content/uploads/2016/11/googleplaystore.png"
+                />
+              </DownloadLink>
+              <DownloadLink href={systemInfo?.rental_apps?.ios?.store_uri} target="_blank">
+                <DownloadImage src="https://fosenenergi.no/wp-content/uploads/2020/09/app-store-logo.png"
+                />
+              </DownloadLink>
+            </DownloadIcons>
+          </FooterRight>
+          </Footer>
       </AppBody>
     </AppContainer>
   )

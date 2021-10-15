@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StationContainer = styled.div`
-    height: 110px;
+    height: 100px;
     background-color: #eee;
     margin: 10px 20px;
     padding: 20px;
@@ -17,15 +17,15 @@ export const StationContainer = styled.div`
 `;
 export const StationName = styled.h3`
     color: #222;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 `;
 export const StationContent = styled.p`
     margin-bottom: 5px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 `;
 export const StationContentValue = styled.span`
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     font-style: italic;
 `;
