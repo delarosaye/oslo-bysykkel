@@ -6,16 +6,10 @@ const StationsList = ({ stationsWithAvailabilities }) => {
     const [counter, setCounter] = useState(0)
     const [ stations, setStations] = useState(stationsWithAvailabilities[0])
 
-    /*const getNextStation = (counter) => {
-        setStations(stationsWithAvailabilities[counter])
-        
-    }*/
-
     const handleReload = () => {
         (counter < stationsWithAvailabilities?.length -1) ?
             setCounter(counter + 1):
             setCounter(0) 
-        //getNextStation(counter)
     }
 
     useEffect(() => {
