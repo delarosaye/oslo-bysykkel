@@ -61,13 +61,11 @@ const App = () => {
     }
   }, [stationsWithAvailabilities])
 
-  console.log(stationsWithAvailabilitiesChunked[0]?.[0])
-
   return (
     <AppContainer>
       <AppHeader>
         <AppHeaderTitle>Oslo Bysykkel tilgjengelighet</AppHeaderTitle>
-        <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilitiesChunked[0]?.[0].availabilities.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
+        <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilitiesChunked[0]?.[0]?.availabilities?.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
       </AppHeader>
       <AppBody>
           <StationContainer>
