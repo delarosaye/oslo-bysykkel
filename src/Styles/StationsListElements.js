@@ -14,4 +14,10 @@ export const Button = styled.button`
     margin: 20px 0px;
     margin-left: 35%;
     cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2ms ease-in-out;
+    &:hover{
+        transition: all 0.2ms ease-in-out;
+        opacity: 1;
+    }
 `;
