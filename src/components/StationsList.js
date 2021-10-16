@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Button, StationsListContainer} from '../Styles/StationsListElements'
 import Station from './Station'
 
-const StationsList = ({ stationsWithAvailabilities }) => {
+const StationsList = ({ stationsWithAvailabilities, size }) => {
     const [counter, setCounter] = useState(0)
     const [ stations, setStations] = useState(stationsWithAvailabilities[0])
 
@@ -22,7 +22,10 @@ const StationsList = ({ stationsWithAvailabilities }) => {
             {(counter === 0 ? stationsWithAvailabilities[counter] : stations)?.map((station) => (
             <Station
                 key={station?.station_id}
-                station={station}
+                    station={station}
+                    id={(counter === 0 ? stationsWithAvailabilities[counter] : stations)?.indexOf(station) }
+                    counter={counter}
+                    size={size}
                 />
             ))}
         <Button onClick={handleReload}>Vis neste 5</Button>
