@@ -60,7 +60,7 @@ export const AppBody = styled.div`
 export const Footer = styled.div`
     display: flex;
     justify-content: space-between;
-    background-color: #350000;
+    background-color: #1A0000;
     margin-top: 10px;
     padding: 40px;
     height: 100px;
