@@ -25,6 +25,7 @@ const App = () => {
   const [systemInfo, setSystemInfo] = useState({})
   const size = 5
 
+  /*Maps the availabilities data to the stations data*/
   const getStationsWithAvailabilities = async (stationsAndAvailabilities) => {
     const stationsWithAvailabilities = await stationsAndAvailabilities[0]?.data?.data?.stations?.map(station => {
         const stationAvailable = stationsAndAvailabilities[1].data?.data?.stations?.find(available => 
@@ -36,6 +37,7 @@ const App = () => {
     setStationsWithAvailabilities(stationsWithAvailabilities)
   }
 
+  /*Function for fetching data from external apis and returning an array of all apis data.*/
   const fetchData = () => {
     const stations = axios.get('https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json')
     const availabilities = axios.get('https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json')
@@ -44,7 +46,7 @@ const App = () => {
         setSystemInfo(res.data.data)
     })
     
-    const combinedStationsAvailabilities = axios.all([stations, availabilities])
+  const combinedStationsAvailabilities = axios.all([stations, availabilities])
       .then(axios.spread((...allData) => {
         getStationsWithAvailabilities(allData)
       })).catch((err) => { console.log(err) });
@@ -55,6 +57,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
+    /*Chunks the stations with mapped availabilities data into an array of a give size chunks*/
     if (stationsWithAvailabilities.length > 0) {
       while (stationsWithAvailabilities.length > 0) {
   const size = 5
