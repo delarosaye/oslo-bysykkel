@@ -23,6 +23,7 @@ const App = () => {
   const [stationsWithAvailabilities, setStationsWithAvailabilities] = useState([])
   const [stationsWithAvailabilitiesChunked, setStationsWithAvailabilitiesChunked] = useState([])
   const [systemInfo, setSystemInfo] = useState({})
+  const size = 5
 
   const getStationsWithAvailabilities = async (stationsAndAvailabilities) => {
     const stationsWithAvailabilities = await stationsAndAvailabilities[0]?.data?.data?.stations?.map(station => {
@@ -56,7 +57,8 @@ const App = () => {
   useEffect(() => {
     if (stationsWithAvailabilities.length > 0) {
       while (stationsWithAvailabilities.length > 0) {
-          stationsWithAvailabilitiesChunked.push(stationsWithAvailabilities.splice(0, 5))
+  const size = 5
+          stationsWithAvailabilitiesChunked.push(stationsWithAvailabilities.splice(0, size))
       }
     }
   }, [stationsWithAvailabilities])
@@ -64,13 +66,14 @@ const App = () => {
   return (
     <AppContainer>
       <AppHeader>
-        <AppHeaderTitle>Oslo Bysykkel tilgjengelighet</AppHeaderTitle>
+        <AppHeaderTitle>Oslo By Sykler</AppHeaderTitle>
         <AppHeaderTimestamp>Sist oppdatert den {new Date(stationsWithAvailabilitiesChunked[0]?.[0]?.availabilities?.last_reported * 1000).toLocaleDateString("no-NO")}</AppHeaderTimestamp>
       </AppHeader>
       <AppBody>
           <StationContainer>
             <StationsList
-              stationsWithAvailabilities={stationsWithAvailabilitiesChunked}
+            stationsWithAvailabilities={stationsWithAvailabilitiesChunked}
+            size={size}
             />
           </StationContainer>
         <Footer>
