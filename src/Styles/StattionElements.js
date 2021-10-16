@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StationContainer = styled.div`
     height: 100px;
-    background-color: #eee;
+    background-color: transparent;
     margin: 10px 20px;
     padding: 20px;
     border-radius: 5px;
@@ -12,16 +12,17 @@ export const StationContainer = styled.div`
     :hover{
         opacity: 1;
         transition: all 0.5ms ease-in-out;
-        background-color: #E0F2FF;
+        background-color: #530000;
     }
 `;
 export const StationName = styled.h3`
-    color: #222;
+    color: #fff;
     margin-bottom: 10px;
 `;
 export const StationContent = styled.p`
     margin-bottom: 5px;
     font-size: 16px;
+    color: #fff;
     font-weight: 500;
 `;
 export const StationContentValue = styled.span`
